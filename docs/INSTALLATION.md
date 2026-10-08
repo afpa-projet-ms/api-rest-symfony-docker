@@ -5,7 +5,7 @@
 > [!TIP] 
 > La dockerisation du projet permet de mettre en place un environnemnt de travail PHP. Vous trouverez dans le container une version PHP>8 avec ses extensions, un serveur WEB (`NGNIX`), un gestionnaire de dépendances PHP (`Composer`) ainsi que le client SYMFONY (`SYMFONY CLI`)
 >
-> Vous trouverez aussi une base de donnée (`mysql`) ainsi qu'un gestionnaire de BDD (`phpmyadmin`)
+> Vous trouverez aussi une base de données (`mysql`) ainsi qu'un gestionnaire de BDD (`phpmyadmin`)
 
 <details>
 <summary>Installation</summary>
@@ -44,7 +44,7 @@ Rendez-vous sur les liens
 </details>
 
 > [!WARNING]
-> A partir de maitenant toutes les commandes devront se faire dans l'invite de commande du contenaire [voir ici](#connectez-vous-au-conteneur)
+> A partir de maitenant toutes les commandes devront se faire dans l'invite de commande du container [voir ici](#connectez-vous-au-conteneur)
 
 ## Créer des entités et controllers
 
@@ -73,7 +73,7 @@ symfony console make:entity
 ![make-entity](images/make-entity.png)
 ![field-entity](images/fields-entity.png)
 
-### Configuration de la base de donnée
+### Configuration de la base de données
 
 Ajoutez la configuration adéquate dans le fichier `.env.local` selon la configuration de docker.
 
@@ -84,7 +84,7 @@ symfony console make:migration
 ```
 ![migration](images/migration.png)
 
-Une fois la vérification de la requête générer :
+Une fois la vérification de la requête générée :
 
 ```sh
 symfony console doctrine:migrations:migrate
@@ -108,7 +108,7 @@ Nous avons maintenant accès à la route `/api`
 
 ## Définir une entité comme ressource pour l'API Platform
 
-Ouvrez l'entité `Roles` créer précedemment et ajouter les attributs suivante :
+Ouvrez l'entité `Roles` créée précedemment et ajouter les attributs suivants :
 
 ![Annotation entity](images/Annotation-entity-api.png)
 
@@ -116,13 +116,13 @@ Retournez sur la page de l'API
 
 ![API with ressource](images/API-Platform-with-ressource.png)
 
-## Ajouter des données dans la base de donnée
+## Ajouter des données dans la base de données
 
 Créer 2 valeurs pour la table `Roles`
 
 ## Testons API Platform
 
-Sur l'interface d'API Platform (http://127.0.0.1:8000/api), allez dans la parti `GET : /api/roles` puis déroulez l'onglet. Cliquez ensuite sur le boutton `Try it out` puis `Execute`
+Sur l'interface d'API Platform (http://127.0.0.1:8000/api), allez dans la partie `GET : /api/roles` puis déroulez l'onglet. Cliquez ensuite sur le boutton `Try it out` puis `Execute`
 
 ![tryoutit](images/Tryitout-execute.gif)
 
@@ -161,11 +161,11 @@ symfony console make:user
 ![make user](images/make-user.png)
 
 > [!IMPORTANT]
-> N'oubliez pas de générer la migration de la table `User` vers la base de donnée
+> N'oubliez pas de générer la migration de la table `User` vers la base de données
 
 ## Mettre l'entité User en ressource POST
 
-Ajoutez les attributs API correspondante a votre entité
+Ajoutez les attributs API correspondants à votre entité
 
 <details>
 <summary>Correction</summary>
@@ -203,7 +203,7 @@ composer require lexik/jwt-authentication-bundle
 symfony console lexik:jwt:generate--keypair
 ```
 La génération des clés ajoute des informations dans votre projet :
-1. Création des fichier private.pem et public.pem dans le dossier config/jwt
+1. Création des fichiers private.pem et public.pem dans le dossier config/jwt
 2. Ajout des clés dans les variables d'environnement de Symfony
    
 ```
@@ -279,10 +279,10 @@ Vérifier la route dans votre navigateur.
 
 ### Générer un token d'authentification
 
-Créer d'abord un utilisateur dans votre base de donnée.
+Créer d'abord un utilisateur dans votre base de données.
 
 Rendez-vous dans l'onglet `Login Check` d'API Platform puis sélectionner ``Try it out`` comme nous l'avions fait pour tester les
-``Roles``, éditer les valeurs du schéma :
+``Roles`` et éditer les valeurs du schéma :
 
 ```json
 // Le mot de passe envoyé est en clair, API Platform et Symfony se charge de le crypter/chiffrer
@@ -301,7 +301,7 @@ J'obtiens en réponse :
 ```
 
 > [!WARNING]
-> Attention, chaque token est différent, ne faites pas un copier/coller du code ci-dessus car il seradifférent de votre application
+> Attention, chaque token est différent, ne faites pas un copier/coller du code ci-dessus car il sera forcément différent de votre application
 
 ### Ajouter l'authentification sur API Platform
 
@@ -317,11 +317,11 @@ api_platform:
                 type: header
 ```
 
-Le bouton « Authorize » s'affichera automatiquement dans Swagger UI. Vous observerez aussi descadenas sur chaque opération :
+Le bouton « Authorize » s'affichera automatiquement dans Swagger UI. Vous observerez aussi des cadenas sur chaque opération :
 
 ![cadenas](images/cadenas.png)
 
-Maintenant si vous essayez d'envoyer une requête à l'API vous devez avoir le message suivant:
+Maintenant si vous essayez d'envoyer une requête à l'API vous devriez avoir le message suivant:
 
 ```json
 {
@@ -332,17 +332,17 @@ Maintenant si vous essayez d'envoyer une requête à l'API vous devez avoir le m
 
 #### Ajouter une clé API
 
-Cliquez sur le bouton `Authorize` puis ajouter le token générer précédemment dans la value:
+Cliquez sur le bouton `Authorize` puis ajouter le token généré précédemment dans la value:
 
 ![token](images/token-jwt.png)
 
 ![valid token](images/valid-token.png)
 
-Vous pouvez maintenant oberver que les cadenas sur API Platform sont tous fermés.
+Vous pouvez maintenant observer que les cadenas sur API Platform sont tous fermés.
 
 #### Tester les opérations avec l'authentification 
 
-Nous pouvons observer dans la parti ``Responses`` la requête ``Curl`` envoyé à l'API. Notre système a permitl'ajout un paramètre ``Authorization: Bearer`` suivi de notre Token, afin d'envoyer une authentification et l'autorisation d'accèder à nos opérations.
+Nous pouvons observer dans la parti ``Responses`` la requête ``Curl`` envoyé à l'API. Notre système a permit l'ajout d'un paramètre ``Authorization: Bearer`` suivi de notre Token, afin d'envoyer une authentification et l'autorisation d'accéder à nos opérations.
 
 ```sh
 curl -X 'GET' \
@@ -369,4 +369,4 @@ Par contre, si vous avez le message suivant :
     "message": "Expired JWT Token"
 }
 ```
-C'est que votre token n'est plus valide, il faut donc revenir à l'étape générer un token d'authentification
+C'est que votre token n'est plus valide, il faut donc revenir à l'étape "générer un token d'authentification".
