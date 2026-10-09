@@ -14,7 +14,5 @@
 
 ### Instruction 
 - [Créer un projet API Symfony avec Docker](docs/INSTALLATION.md)
-- [Installation du bundle API Platform sous Symfony](docs/API.md)
-- [Configurer l’authentification JWT dans Symfony pour sécuriser l’API](docs/JWT.md)
 
 
